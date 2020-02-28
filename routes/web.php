@@ -44,4 +44,12 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/->group(function 
 //CRUD for products
     Route::get('/product/datatable', 'Admin\ProductController@datatableData')->name('product.datatable.data');
     Route::resource('product', 'Admin\ProductController');
+
+//CRUD for attributes
+    Route::get('/attribute/datatable', 'Admin\AttributeController@datatableData')->name('attribute.datatable.data');
+    Route::resource('attribute', 'Admin\AttributeController');
+
+//CRUD for orders
+    Route::get('/order/datatable', 'Admin\OrderController@datatableData')->name('order.datatable.data');
+    Route::resource('order', 'Admin\OrderController');
 });
