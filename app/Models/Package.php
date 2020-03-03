@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Package extends Model
+{
+    protected $fillable = [
+        'name',
+    ];
+
+    public function attributes()
+    {
+        return $this->morphMany(Attribute::class, 'attributable');
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
+}

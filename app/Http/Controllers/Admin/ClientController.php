@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Client;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
@@ -47,7 +47,7 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function show(Client $client)
@@ -58,7 +58,7 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function edit(Client $client)
@@ -73,7 +73,7 @@ class ClientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Client $client)
@@ -87,7 +87,7 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function destroy(Client $client)

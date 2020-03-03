@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\City;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 
-class ProductController extends Controller
+class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index');
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        //
     }
 
     /**
@@ -37,18 +35,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Product::create($request->all());
-
-        return redirect()->route('admin.product.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(City $city)
     {
         //
     }
@@ -56,10 +52,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(City $city)
     {
         //
     }
@@ -68,10 +64,10 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, City $city)
     {
         //
     }
@@ -79,17 +75,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(City $city)
     {
         //
-    }
-
-    public function datatableData(Request $request)
-    {
-        return DataTables::of(Product::query())
-            ->make(true);
     }
 }

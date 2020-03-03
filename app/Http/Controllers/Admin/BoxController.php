@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Box;
 use App\Models\City;
-use App\Models\Client;
 use App\Http\Controllers\Controller;
-use App\Models\Order;
-use App\Models\Product;
-use App\Services\Attributable;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class OrderController extends Controller
+class BoxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin.orders.index');
+        return view('admin.boxes.index');
     }
 
     /**
@@ -30,16 +28,12 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $attributes = Attributable::hasAttribute('Order');
-        $clients = Client::all();
-        $products = Product::all();
         $cities = City::all();
+        $packages = Package::all();
 
-        return view('admin.orders.create', [
-            'clients' => $clients,
-            'products' => $products,
+        return view('admin.boxes.create', [
             'cities' => $cities,
-            'attributes' => $attributes,
+            'packages' => $packages,
         ]);
     }
 
@@ -51,21 +45,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($request->all());
-        foreach ($request->request->get('attributes') as $index => $attribute) {
-            $order->attributes()->attach($index, ['value' => $attribute]);
-        }
+        $city = City::create($request->all());
 
-        return redirect()->route('admin.order.index');
+        return redirect()->route('admin.box.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
+     * @param  \App\Box  $box
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Box $box)
     {
         //
     }
@@ -73,40 +64,44 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Box  $box
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(Box $box)
     {
-        //
+        return view('admin.boxes.edit', [
+            'box' => $box,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
+     * @param  \App\Box  $box
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Box $box)
     {
-        //
+        $box->update($request->all());
+
+        return redirect()->route('admin.box.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Box  $box
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy(Box $box)
     {
         //
     }
 
     public function datatableData(Request $request)
     {
-        return DataTables::of(Order::query())
+        return DataTables::of(Box::query())
             ->make(true);
     }
 }

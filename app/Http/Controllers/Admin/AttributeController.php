@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Attribute;
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -26,7 +26,11 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view('admin.attributes.create');
+        $models = $this->getModels('/Models');
+
+        return view('admin.attributes.create', [
+            'models' => $models,
+        ]);
     }
 
     /**
@@ -50,7 +54,7 @@ class AttributeController extends Controller
      */
     public function show(Attribute $attribute)
     {
-        //
+        dd($attribute->models);
     }
 
     /**

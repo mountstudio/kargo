@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\City;
-use App\Models\Client;
 use App\Http\Controllers\Controller;
-use App\Models\Order;
-use App\Models\Product;
-use App\Services\Attributable;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class OrderController extends Controller
+class PackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin.orders.index');
+        return view('admin.packages.index');
     }
 
     /**
@@ -30,17 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $attributes = Attributable::hasAttribute('Order');
-        $clients = Client::all();
-        $products = Product::all();
-        $cities = City::all();
-
-        return view('admin.orders.create', [
-            'clients' => $clients,
-            'products' => $products,
-            'cities' => $cities,
-            'attributes' => $attributes,
-        ]);
+        return view('admin.packages.create');
     }
 
     /**
@@ -51,21 +37,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($request->all());
-        foreach ($request->request->get('attributes') as $index => $attribute) {
-            $order->attributes()->attach($index, ['value' => $attribute]);
-        }
+        $package = Package::create($request->all());
 
-        return redirect()->route('admin.order.index');
+        return redirect()->route('admin.package.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
+     * @param  \App\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Package $package)
     {
         //
     }
@@ -73,40 +56,44 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(Package $package)
     {
-        //
+        return view('admin.packages.edit', [
+            'package' => $package,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
+     * @param  \App\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Package $package)
     {
-        //
+        $package->update($request->all());
+
+        return redirect()->route('admin.package.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy(Package $package)
     {
         //
     }
 
     public function datatableData(Request $request)
     {
-        return DataTables::of(Order::query())
+        return DataTables::of(Package::query())
             ->make(true);
     }
 }

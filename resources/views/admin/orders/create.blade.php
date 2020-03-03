@@ -23,6 +23,25 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="city_id_field">{{ __('Select City') }}<span class="text-danger">*</span></label>
+                    <select id="city_id_field" type="text" class="form-control" name="city_id" required>
+                        <option value="{{ null }}">{{ __('Select option') }}</option>
+                        @foreach($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                @if($attributes->count())
+                    @foreach($attributes as $attribute)
+                        <div class="form-group">
+                            <label for="attribute_{{ $attribute->id }}_field">{{ __($attribute->name) }}<span class="text-danger">*</span></label>
+                            <input id="attribute_{{ $attribute->id }}_field" type="text" name="attributes[{{ $attribute->id }}]" class="form-control" required>
+                        </div>
+                    @endforeach
+                @endif
+
                 <button type="submit" title="{{ __('Добавить') }}" class="btn n btn-success">{{ __('Добавить') }}</button>
             </form>
         </div>

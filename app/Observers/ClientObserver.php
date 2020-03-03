@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
-use App\Client;
-use App\User;
+use App\Models\Client;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class ClientObserver

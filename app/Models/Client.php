@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +15,6 @@ class Client extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->using(Order::class)->withTimestamps();
+        return $this->belongsToMany(Product::class)->using(Order::class)->withPivot(['quantity'])->withTimestamps();
     }
 }

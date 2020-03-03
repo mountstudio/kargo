@@ -52,4 +52,20 @@ Route::prefix('admin')->name('admin.')/*->middleware('admin')*/->group(function 
 //CRUD for orders
     Route::get('/order/datatable', 'Admin\OrderController@datatableData')->name('order.datatable.data');
     Route::resource('order', 'Admin\OrderController');
+
+//CRUD for orders
+    Route::get('/box/datatable', 'Admin\BoxController@datatableData')->name('box.datatable.data');
+    Route::resource('box', 'Admin\BoxController');
+
+//CRUD for orders
+    Route::get('/city/datatable', 'Admin\CityController@datatableData')->name('city.datatable.data');
+    Route::resource('city', 'Admin\CityController');
+
+//CRUD for orders
+    Route::get('/package/datatable', 'Admin\PackageController@datatableData')->name('package.datatable.data');
+    Route::resource('package', 'Admin\PackageController');
+
+//CRUD for orders
+    Route::get('/packed/datatable', 'Admin\PackedController@datatableData')->name('packed.datatable.data');
+    Route::resource('packed', 'Admin\PackedController');
 });

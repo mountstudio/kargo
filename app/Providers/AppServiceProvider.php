@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Client;
+use App\Models\Client;
 use App\Observers\ClientObserver;
 use Illuminate\Support\ServiceProvider;
 

@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\City;
-use App\Models\Client;
 use App\Http\Controllers\Controller;
-use App\Models\Order;
-use App\Models\Product;
-use App\Services\Attributable;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class OrderController extends Controller
+class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin.orders.index');
+        return view('admin.cities.index');
     }
 
     /**
@@ -30,17 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $attributes = Attributable::hasAttribute('Order');
-        $clients = Client::all();
-        $products = Product::all();
-        $cities = City::all();
-
-        return view('admin.orders.create', [
-            'clients' => $clients,
-            'products' => $products,
-            'cities' => $cities,
-            'attributes' => $attributes,
-        ]);
+        return view('admin.cities.create');
     }
 
     /**
@@ -51,21 +37,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($request->all());
-        foreach ($request->request->get('attributes') as $index => $attribute) {
-            $order->attributes()->attach($index, ['value' => $attribute]);
-        }
+        $city = City::create($request->all());
 
-        return redirect()->route('admin.order.index');
+        return redirect()->route('admin.city.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
+     * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(City $city)
     {
         //
     }
@@ -73,40 +56,44 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(City $city)
     {
-        //
+        return view('admin.cities.edit', [
+            'city' => $city,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
+     * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, City $city)
     {
-        //
+        $city->update($request->all());
+
+        return redirect()->route('admin.city.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy(City $city)
     {
         //
     }
 
     public function datatableData(Request $request)
     {
-        return DataTables::of(Order::query())
+        return DataTables::of(City::query())
             ->make(true);
     }
 }
