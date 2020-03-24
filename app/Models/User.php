@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Client::class);
     }
+
+    public function attributes()
+    {
+        return $this->morphToMany(Attribute::class, 'attributable')->withTimestamps();
+    }
 }

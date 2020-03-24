@@ -22,6 +22,6 @@ class Product extends Model
 
     public function attributes()
     {
-        return $this->morphMany(Attribute::class, 'attributable');
+        return $this->morphToMany(Attribute::class, 'attributable')->withTimestamps();
     }
 }

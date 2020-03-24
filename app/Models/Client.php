@@ -17,4 +17,9 @@ class Client extends Model
     {
         return $this->belongsToMany(Product::class)->using(Order::class)->withPivot(['quantity'])->withTimestamps();
     }
+
+    public function attributes()
+    {
+        return $this->morphToMany(Attribute::class, 'attributable')->withTimestamps();
+    }
 }

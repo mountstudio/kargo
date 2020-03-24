@@ -10,13 +10,13 @@ class Package extends Model
         'name',
     ];
 
-    public function attributes()
-    {
-        return $this->morphMany(Attribute::class, 'attributable');
-    }
-
     public function orders()
     {
         return $this->belongsToMany(Order::class);
+    }
+
+    public function attributes()
+    {
+        return $this->morphToMany(Attribute::class, 'attributable')->withTimestamps();
     }
 }

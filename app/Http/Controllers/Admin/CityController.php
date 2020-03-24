@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\City;
 use App\Http\Controllers\Controller;
+use App\Services\Attributable;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -26,7 +27,10 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('admin.cities.create');
+        $attributes = Attributable::hasAttribute('City');
+        return view('admin.cities.create', [
+            'attributes' => $attributes,
+        ]);
     }
 
     /**

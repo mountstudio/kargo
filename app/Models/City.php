@@ -14,4 +14,9 @@ class City extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function attributes()
+    {
+        return $this->morphToMany(Attribute::class, 'attributable')->withTimestamps();
+    }
 }

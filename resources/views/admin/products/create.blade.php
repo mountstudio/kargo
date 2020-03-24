@@ -17,6 +17,14 @@
                     <label for="country_field">{{ __('Country') }}<span class="text-danger">*</span></label>
                     <input id="country_field" type="text" class="form-control" name="country" required>
                 </div>
+                @if($attributes->count())
+                    @foreach($attributes as $attribute)
+                        <div class="form-group">
+                            <label for="attribute_{{ $attribute->id }}_field">{{ __($attribute->name) }}<span class="text-danger">*</span></label>
+                            <input id="attribute_{{ $attribute->id }}_field" type="text" name="attributes[{{ $attribute->id }}]" class="form-control" required>
+                        </div>
+                    @endforeach
+                @endif
                 <button type="submit" title="{{ __('Добавить') }}" class="btn n btn-success">{{ __('Добавить') }}</button>
             </form>
         </div>

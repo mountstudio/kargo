@@ -59,8 +59,8 @@ class PackedController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Packed  $packed
-     * @return \Illuminate\Http\Response
+     * @param Packed $packed
+     * @return void
      */
     public function show(Packed $packed)
     {

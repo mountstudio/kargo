@@ -19,4 +19,9 @@ class Box extends Model
     {
         return $this->morphedByMany(Product::class, 'attributable');
     }
+
+    public function attributes()
+    {
+        return $this->morphToMany(Attribute::class, 'attributable')->withTimestamps();
+    }
 }
